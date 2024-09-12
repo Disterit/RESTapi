@@ -1,8 +1,11 @@
 package main
 
 import (
+	"RESTapi/internal/api"
 	"RESTapi/internal/config"
+	"github.com/go-chi/chi"
 	"log/slog"
+	"net/http"
 	"os"
 )
 
@@ -19,6 +22,14 @@ func main() {
 
 	log.Info("starting api wallet", slog.String("key", cfg.Env))
 	log.Debug("debug message are enable")
+
+	router := chi.NewRouter()
+	router.Post("api/v1/wallet", api.CreateWallet)
+	router.Post("api/v1/wallet/{walletID}/send", api.SendMoney)
+	router.Get("/api/v1/wallet/{walletID}/history", api.HistoryWallet)
+	router.Get("/api/v1/wallet/{walletID}", api.InfoWallet)
+
+	http.ListenAndServe(cfg.Address+":"+cfg.Port, router)
 
 }
 
