@@ -24,12 +24,15 @@ func main() {
 	log.Debug("debug message are enable")
 
 	router := chi.NewRouter()
-	router.Post("api/v1/wallet", api.CreateWallet)
-	router.Post("api/v1/wallet/{walletID}/send", api.SendMoney)
+	router.Post("/api/v1/wallet", api.CreateWallet)
+	router.Post("/api/v1/wallet/{walletID}/send", api.SendMoney)
 	router.Get("/api/v1/wallet/{walletID}/history", api.HistoryWallet)
 	router.Get("/api/v1/wallet/{walletID}", api.InfoWallet)
 
-	http.ListenAndServe(cfg.Address+":"+cfg.Port, router)
+	err := http.ListenAndServe(cfg.Address, router)
+	if err != nil {
+		log.Error("error starting http server ", err)
+	}
 
 }
 
