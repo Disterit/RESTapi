@@ -43,4 +43,5 @@
 1. Клонируйте репозиторий:
    ```bash
    git clone https://github.com/Disterit/RESTapi
-   cd ewallet
+   cd RESTapi
+   docker-compose up
