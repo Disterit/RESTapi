@@ -43,5 +43,9 @@
 1. Клонируйте репозиторий:
    ```bash
    git clone https://github.com/Disterit/RESTapi
+2. Зайдите в директорию:
+   ```bash
    cd RESTapi
+3. Запустите проект:
+```bash
    docker-compose up
