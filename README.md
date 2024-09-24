@@ -1,46 +1,46 @@
 # EWallet Application
 
-## Overview
+## Обзор
 
 Приложение EWallet — это простая система платежных транзакций, реализованная как RESTful HTTP-сервер в Go. Это приложение позволяет пользователям создавать кошельки, переводить средства между кошельками, получать историю транзакций и проверять балансы кошельков. 
 
-## Features
+## Функции
 
 1. **Create Wallet**
    - **Endpoint:** `POST /api/v1/wallet`
-   - **Response:** JSON object with the wallet ID and balance (initially set to 100.0).
+   - **Response:** JSON-объект с ID кошелька и балансом (начально установленным на 100.0)
 
-2. **Send Money**
-   - **Endpoint:** `POST /api/v1/wallet/{walletId}/send`
-   - **Request Body:** JSON object containing:
-     - `to`: ID of the recipient wallet
-     - `amount`: Amount to transfer
-   - **Response:** 
-     - `200 OK` if successful
-     - `404 Not Found` if the source wallet does not exist
-     - `400 Bad Request` if the target wallet does not exist or insufficient funds
+2. **Перевод средств**
+   - **Эндпоинт:** `POST /api/v1/wallet/{walletId}/send`
+   - **Тело запроса:** JSON-объект, содержащий:
+     - `to`: ID получателя
+     - `amount`: Сумма перевода
+   - **Ответ:** 
+     - `200 OK` при успешном переводе
+     - `404 Not Found`, если исходящий кошелек не найден
+     - `400 Bad Request`, если целевой кошелек не найден или недостаточно средств
 
-3. **Get Transaction History**
-   - **Endpoint:** `GET /api/v1/wallet/{walletId}/history`
-   - **Response:** 
-     - `200 OK` with a JSON array of transaction objects if the wallet exists
-     - `404 Not Found` if the wallet does not exist
+3. **Получение истории транзакций**
+   - **Эндпоинт:** `GET /api/v1/wallet/{walletId}/history`
+   - **Ответ:** 
+     - `200 OK` с JSON-массивом объектов транзакций, если кошелек существует
+     - `404 Not Found`, если кошелек не найден
 
-4. **Get Wallet Info**
-   - **Endpoint:** `GET /api/v1/wallet/{walletId}`
-   - **Response:**
-     - `200 OK` with a JSON object containing the wallet ID and balance if the wallet exists
-     - `404 Not Found` if the wallet does not exist
+4. **Получение информации о кошельке**
+   - **Эндпоинт:** `GET /api/v1/wallet/{walletId}`
+   - **Ответ:**
+     - `200 OK` с JSON-объектом, содержащим ID кошелька и баланс, если кошелек существует
+     - `404 Not Found`, если кошелек не найден
 
-## Requirements
+## Требования
 
 - **Go Version:** 1.21
 - **Database:** PostgreSQL
 - **Docker** 26.1.1
 
-## Setup
+## Установка
 
-1. Clone the repository:
+1. Клонируйте репозиторий:
    ```bash
    git clone https://github.com/Disterit/RESTapi
    cd ewallet
