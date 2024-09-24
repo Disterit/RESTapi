@@ -36,6 +36,7 @@
 
 - **Go Version:** 1.21
 - **Database:** PostgreSQL
+- **Docker** 26.1.1
 
 ## Setup
 
