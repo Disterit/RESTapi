@@ -47,5 +47,5 @@
    ```bash
    cd RESTapi
 3. Запустите проект:
-```bash
+   ```bash
    docker-compose up
