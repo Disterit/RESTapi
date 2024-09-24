@@ -3,13 +3,16 @@ package main
 import (
 	"fmt"
 	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
-	"strings"
+	"time"
 )
 
 func main() {
-	const op = "http://localhost:8081/api/v1/wallet/{walletId}/send"
+	a := time.Now()
 
-	walletID := strings.Split(op, "/")[6]
+	fmt.Println(a)
 
-	fmt.Println(walletID)
+}
+
+func printa(time time.Time) {
+	fmt.Println(time)
 }

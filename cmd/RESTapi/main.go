@@ -3,6 +3,8 @@ package main
 import (
 	"RESTapi/internal/api"
 	"RESTapi/internal/config"
+	"RESTapi/internal/storage"
+	"RESTapi/internal/storage/postgres"
 	"github.com/go-chi/chi"
 	"log/slog"
 	"net/http"
@@ -23,11 +25,18 @@ func main() {
 	log.Info("starting api wallet", slog.String("key", cfg.Env))
 	log.Debug("debug message are enable")
 
+	db := storage.Connection()
+	defer db.Close()
+
+	storageDB := postgres.NewStorage(db)
+
+	storageDB.CreateTable()
+
 	router := chi.NewRouter()
-	router.Post("/api/v1/wallet", api.CreateWallet)
-	router.Post("/api/v1/wallet/{walletID}/send", api.SendMoney)
-	router.Get("/api/v1/wallet/{walletID}/history", api.HistoryWallet)
-	router.Get("/api/v1/wallet/{walletID}", api.InfoWallet)
+	router.Post("/api/v1/wallet", api.CreateWalletHandler(storageDB))
+	router.Post("/api/v1/wallet/{walletID}/send", api.SendMoneyHandler(storageDB))
+	router.Get("/api/v1/wallet/{walletID}/history", api.HistoryWalletHandler(storageDB))
+	router.Get("/api/v1/wallet/{walletID}", api.InfoWalletHandler(storageDB))
 
 	err := http.ListenAndServe(cfg.Address, router)
 	if err != nil {

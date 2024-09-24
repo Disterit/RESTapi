@@ -19,7 +19,7 @@ func Connection() *sql.DB {
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		log.Fatalf("%s %v", op, err)
+		log.Printf("%s %v", op, err)
 	}
 
 	return db
