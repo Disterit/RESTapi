@@ -41,5 +41,5 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/ewallet.git
+   git clone [https://github.com/yourusername/ewallet.git](https://github.com/Disterit/RESTapi)
    cd ewallet
